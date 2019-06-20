@@ -75,6 +75,19 @@ app.put('/api/courses/:id', (req, res) =>{
 
 
 
+app.delete('api/courses/:id', (req, res) =>{
+    const singleCourse = coursesArr.find(course => course.id === parseInt(req.params.id)); //check if id element of array matches the param. Since it first compares it to a string, we need to use parseInt to convert it to an integer
+        if(!singleCourse) return res.status('404').send('course with the given id not found! :(');
+    const index = coursesArr.indexOf(singleCourse);
+    coursesArr.splice(index, 1)
+
+    res.send(singleCourse);
+})
+
+
+
+
+
 
 app.get('/api/courses/:id', (req, res) =>{
     const singleCourse = coursesArr.find(course => course.id === parseInt(req.params.id)); //check if id element of array matches the param. Since it first compares it to a string, we need to use parseInt to convert it to an integer
